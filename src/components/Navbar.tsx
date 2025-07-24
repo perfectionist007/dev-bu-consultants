@@ -9,6 +9,31 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
 
+  const getSubmenuDescription = (name: string) => {
+    const descriptions: { [key: string]: string } = {
+      "Healthcare": "Digital solutions for healthcare providers and patients",
+      "Banking & Financial Services": "Innovative fintech and banking solutions",
+      "Insurance": "Modern insurance technology and platforms",
+      "Telecom": "Next-generation telecommunications services",
+      "Life Sciences": "Advanced solutions for pharmaceutical and biotech",
+      "High Technology": "Cutting-edge technology implementations",
+      "Media & Entertainment": "Digital media and entertainment platforms",
+      "Government": "Public sector digital transformation",
+      "Manufacturing": "Industry 4.0 and smart manufacturing",
+      "Application Services": "End-to-end application development and maintenance",
+      "Cloud & Infrastructure": "Scalable cloud solutions and infrastructure",
+      "Cybersecurity": "Comprehensive security and threat protection",
+      "Data & Analytics": "Advanced analytics and business intelligence",
+      "Digital Engineering Services": "Modern engineering and development practices",
+      "Intelligent Automation": "AI-powered automation and process optimization",
+      "Quality Engineering": "Comprehensive testing and quality assurance",
+      "BrassRing Solutions": "Talent acquisition and HR technology",
+      "Small Business Solutions": "Tailored solutions for growing businesses",
+      "Infinite Convergence": "Unified communications and collaboration",
+    };
+    return descriptions[name] || "Innovative solutions and services";
+  };
+
   const menuItems = [
     {
       name: "Industries",
@@ -87,18 +112,25 @@ const Navbar = () => {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
-                        className="absolute top-full left-0 mt-2 w-64 bg-card/95 backdrop-blur-md border border-border rounded-lg shadow-lg overflow-hidden"
+                        className="fixed top-16 left-0 w-full bg-white dark:bg-card border-t border-border shadow-xl z-50"
                       >
-                        <div className="py-2">
-                          {item.submenu.map((subItem) => (
-                            <a
-                              key={subItem.name}
-                              href={subItem.href}
-                              className="block px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
-                            >
-                              {subItem.name}
-                            </a>
-                          ))}
+                        <div className="container mx-auto px-4 py-8">
+                          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                            {item.submenu.map((subItem) => (
+                              <a
+                                key={subItem.name}
+                                href={subItem.href}
+                                className="block p-4 rounded-lg hover:bg-muted/50 transition-colors group"
+                              >
+                                <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
+                                  {subItem.name}
+                                </h3>
+                                <p className="text-sm text-muted-foreground">
+                                  {getSubmenuDescription(subItem.name)}
+                                </p>
+                              </a>
+                            ))}
+                          </div>
                         </div>
                       </motion.div>
                     )}
