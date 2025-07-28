@@ -44,7 +44,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-card border-t border-border">
+    <footer className="bg-card">
       <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Company Info */}
@@ -55,8 +55,8 @@ const Footer = () => {
               transition={{ duration: 0.6 }}
               className="mb-6"
             >
-              <div className="text-2xl font-bold text-primary mb-4">Infinite</div>
-              <p className="text-muted-foreground text-sm leading-relaxed">
+              <div className="text-2xl font-bold text-white mb-4">Bottom Up Consultants</div>
+              <p className="text-white text-sm leading-relaxed">
                 Digitally engineering tomorrow, today. Building future-ready enterprises through innovation and strategic partnerships.
               </p>
             </motion.div>
@@ -76,7 +76,7 @@ const Footer = () => {
                   <li key={link}>
                     <a
                       href="#"
-                      className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                      className="text-white hover:text-primary transition-colors text-sm"
                     >
                       {link}
                     </a>
@@ -92,20 +92,20 @@ const Footer = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="border-t border-border pt-8 mt-12"
+          className="pt-8 mt-12"
         >
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="text-sm text-muted-foreground">
-              © 2024 Infinite. All rights reserved.
+            <div className="text-sm text-white">
+              © 2025 Bottom Up Consultants. All rights reserved.
             </div>
             <div className="flex space-x-6 text-sm">
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <a href="#" className="text-white hover:text-primary transition-colors">
                 Privacy Policy
               </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <a href="#" className="text-white hover:text-primary transition-colors">
                 Terms of Service
               </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <a href="#" className="text-white hover:text-primary transition-colors">
                 Cookie Policy
               </a>
             </div>

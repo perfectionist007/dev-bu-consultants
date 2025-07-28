@@ -19,7 +19,6 @@ const Navbar = () => {
       "High Technology": "Cutting-edge technology implementations",
       "Media & Entertainment": "Digital media and entertainment platforms",
       "Government": "Public sector digital transformation",
-      "Manufacturing": "Industry 4.0 and smart manufacturing",
       "Application Services": "End-to-end application development and maintenance",
       "Cloud & Infrastructure": "Scalable cloud solutions and infrastructure",
       "Cybersecurity": "Comprehensive security and threat protection",
@@ -45,8 +44,7 @@ const Navbar = () => {
         { name: "Life Sciences", href: "#" },
         { name: "High Technology", href: "#" },
         { name: "Media & Entertainment", href: "#" },
-        { name: "Government", href: "#" },
-        { name: "Manufacturing", href: "#" },
+        { name: "Government", href: "#" }      
       ]
     },
     {
@@ -81,16 +79,16 @@ const Navbar = () => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
-      <div className="backdrop-blur-md bg-glass-navbar border-b border-white/10">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo */}
-            <div className="flex-shrink-0">
-              <div className="text-2xl font-bold text-primary">
-                Infinite
-              </div>
-            </div>
+    <header className="fixed top-0 left-0 right-0 z-50" style={{ backgroundColor: 'var(--navbar-back)' }}>
+  <div className="navbar-back border-b border-white/10">
+    <div className="container mx-auto px-4">
+      <div className="flex items-center justify-between h-16">
+        {/* Logo */}
+        <div className="flex-shrink-0">
+          <div className="text-2xl font-bold text-white">
+            Bottom Up Consultants
+          </div>
+        </div>
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center space-x-8">
@@ -101,9 +99,11 @@ const Navbar = () => {
                   onMouseEnter={() => setHoveredMenu(item.name)}
                   onMouseLeave={() => setHoveredMenu(null)}
                 >
-                  <button className="flex items-center space-x-1 text-foreground hover:text-primary transition-colors">
-                    <span>{item.name}</span>
-                    <ChevronDown className="h-4 w-4" />
+                  <button className="flex items-center space-x-1 text-foreground transition-colors font-600">
+                      <span className="transition-all duration-300 inline-block after:block after:w-0 after:h-[2px] after:bg-black dark:after:bg-white after:transition-all after:duration-300 hover:after:w-full hover:after:scale-x-100">
+                      {item.name}
+                      </span>
+                    {/*<ChevronDown className="h-4 w-4" />*/}
                   </button>
 
                   <AnimatePresence>
@@ -112,20 +112,20 @@ const Navbar = () => {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
-                        className="fixed top-16 left-0 w-full bg-white dark:bg-card border-t border-border shadow-xl z-50"
+                        className="fixed top-16 left-0 w-full bg-black dark:bg-white z-50 motion-div"
                       >
-                        <div className="container mx-auto px-4 py-8">
-                          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        <div className="mx-auto px-0 w-full">
+                          <div className="w-full grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
                             {item.submenu.map((subItem) => (
                               <a
                                 key={subItem.name}
                                 href={subItem.href}
-                                className="block p-4 rounded-lg hover:bg-muted/50 transition-colors group"
+                                className="block p-8 transition-colors group hover:bg-white dark:hover:bg-black text-white dark:text-black hover:text-black dark:hover:text-white"
                               >
-                                <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
+                                <h3 className="font-semibold transition-colors mb-1 font-500">
                                   {subItem.name}
                                 </h3>
-                                <p className="text-sm text-muted-foreground">
+                                <p className="text-sm font-500">
                                   {getSubmenuDescription(subItem.name)}
                                 </p>
                               </a>
@@ -135,9 +135,11 @@ const Navbar = () => {
                       </motion.div>
                     )}
                   </AnimatePresence>
+
+
                 </div>
               ))}
-              <a href="#" className="text-foreground hover:text-primary transition-colors">
+              <a href="#" className="font-600 text-foreground hover:text-primary transition-colors">
                 Careers
               </a>
             </nav>
@@ -148,7 +150,7 @@ const Navbar = () => {
                 variant="ghost"
                 size="icon"
                 onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-                className="hover:bg-muted/50"
+                className="hover:bg-muted/50 bg-transparent"
               >
                 {theme === "light" ? (
                   <Moon className="h-5 w-5" />
@@ -207,10 +209,10 @@ const Navbar = () => {
                     </div>
                   </div>
                 ))}
-                <a href="#" className="block text-foreground hover:text-primary">
+                <a href="#" className="font-600 block text-foreground hover:text-primary">
                   Careers
                 </a>
-                <Button variant="outline" className="w-full">
+                <Button variant="outline" className="font-600 w-full">
                   Contact Us
                 </Button>
               </div>
