@@ -3,8 +3,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Sun, Moon, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "./ThemeProvider";
+import logo from "@/assets/logo1.png";
 
 const Navbar = () => {
+  const [activeMenu, setActiveMenu] = useState<string | null>(null); 
   const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
@@ -83,12 +85,21 @@ const Navbar = () => {
   <div className="navbar-back border-b border-white/10">
     <div className="container mx-auto px-4">
       <div className="flex items-center justify-between h-16">
-        {/* Logo */}
-        <div className="flex-shrink-0">
-          <div className="text-2xl font-bold text-white">
+        {/*<div className="flex-shrink-0">
+          <img src={logo} alt="Bottom Up Consultant Logo" className="h-8 mr-2" />
+              <div className="text-2xl font-bold text-white">
+                Bottom Up Consultants
+              </div>
+        </div>*/}
+        {/* Logo and Text */}
+        <div className="flex items-center">
+          <img src={logo} alt="Bottom Up Consultant Logo" className="h-12 mr-2" /> 
+          <div className="text-xl font-bold text-white"> {/* Smaller Text */}
             Bottom Up Consultants
           </div>
         </div>
+
+
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center space-x-8">
@@ -181,44 +192,56 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Navigation */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden border-t border-border"
-            >
-              <div className="container mx-auto px-4 py-4 space-y-4">
-                {menuItems.map((item) => (
-                  <div key={item.name} className="space-y-2">
-                    <button className="flex items-center justify-between w-full text-left text-foreground">
-                      <span>{item.name}</span>
-                      <ChevronDown className="h-4 w-4" />
-                    </button>
-                    <div className="pl-4 space-y-1">
-                      {item.submenu.map((subItem) => (
-                        <a
-                          key={subItem.name}
-                          href={subItem.href}
-                          className="block py-1 text-sm text-muted-foreground hover:text-foreground"
+            <AnimatePresence>
+              {isMobileMenuOpen && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="lg:hidden border-t border-border"
+                >
+                  <div className="container mx-auto px-4 py-4 space-y-4">
+                    {menuItems.map((item) => (
+                      <div key={item.name} className="space-y-2">
+                        <button
+                          className="flex items-center justify-between w-full text-left text-foreground"
+                          onClick={() => setActiveMenu(activeMenu === item.name ? null : item.name)} // Toggle active menu
                         >
-                          {subItem.name}
-                        </a>
-                      ))}
-                    </div>
+                          <span>{item.name}</span>
+                          <ChevronDown className="h-4 w-4" />
+                        </button>
+                        <AnimatePresence>
+                          {activeMenu === item.name && ( // Only show submenu if activeMenu matches
+                            <motion.div
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              exit={{ opacity: 0 }}
+                              className="pl-4 space-y-1"
+                            >
+                              {item.submenu.map((subItem) => (
+                                <a
+                                  key={subItem.name}
+                                  href={subItem.href}
+                                  className="block py-1 text-sm text-muted-foreground hover:text-foreground"
+                                >
+                                  {subItem.name}
+                                </a>
+                              ))}
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    ))}
+                    <a href="#" className="font-600 block text-foreground hover:text-primary">
+                      Careers
+                    </a>
+                    <Button variant="outline" className="font-600 w-full">
+                      Contact Us
+                    </Button>
                   </div>
-                ))}
-                <a href="#" className="font-600 block text-foreground hover:text-primary">
-                  Careers
-                </a>
-                <Button variant="outline" className="font-600 w-full">
-                  Contact Us
-                </Button>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+                </motion.div>
+              )}
+            </AnimatePresence>
       </div>
     </header>
   );
